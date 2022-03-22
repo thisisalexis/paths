@@ -42,7 +42,8 @@ app.use(function(err, req, res, next) {
 });
 
 //Stuffs added by me that shouldn't be deleted and are really been used
-const dotenv = require('dotenv'); //debería estar arriba en cargas
+//TODO estas dos líneas deberían estar arriba, antes de todo, moverlas
+const dotenv = require('dotenv'); //debería estar arriba en cargas, porque entonces las variables se están cargando en process 
 dotenv.config({ path: './config.env' }); // Básicamene carga lo que está en el archivo .env y lo carga en la variable process.env que es accesible desde todos lados en la app
 
 //Stuffs added by me that sould be deleted
@@ -58,3 +59,4 @@ app.listen(port, () => {
 });
 
 module.exports = app;
+ 
