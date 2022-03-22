@@ -6,9 +6,10 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-const pathsRouter = require('./routes/paths');
+const pathsRouter = require('./routes/pathsRouter');
 
 var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,8 +41,18 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+//Stuffs added by me that shouldn't be deleted and are really been used
+const dotenv = require('dotenv'); //debería estar arriba en cargas
+dotenv.config({ path: './config.env' }); // Básicamene carga lo que está en el archivo .env y lo carga en la variable process.env que es accesible desde todos lados en la app
+
+//Stuffs added by me that sould be deleted
+console.log("Process object");
+console.log(process);
+console.log("Environment");
+console.log(process.env);
+
 //Server configuration
-const port = 3000;
+const port = process.env.PORT  || 3000;
 app.listen(port, () => {
   console.log(`Node server started with express on port ${port} `);
 });

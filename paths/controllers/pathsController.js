@@ -1,15 +1,25 @@
 const express = require("express");
 const app = express();
 
+let defaultPath = { 
+    "id": "1",
+    "name": "My first learning Path",
+    "description": "Long description",
+    "createdBy": "thisisalexis",
+    "createdAt": new Date(),
+    "updatedAt": new Date(),
+    "rate": 5,
+    "category": 50,
+    "visualizations": 661234,
+    "numberOfSteps": 10, 
+    "language": "en_US"
+ };
+
 exports.getAllPaths = (req, res) => {
     
     console.log(req, res); //TODO delete this
 
-    res.status(200).json({ 
-        "_id": "0",
-        "name": "My first learning Path",
-        "createdBy": "thisisalexis"
-     });
+    res.status(200).json([defaultPath, defaultPath, defaultPath, defaultPath, defaultPath, defaultPath]);
 
 };
 
@@ -35,3 +45,10 @@ exports.getPathById = (req, res) => {
         "id": req.params.id
      });
 };
+
+exports.searchPaths = (req, res) => {
+
+    console.log(`Searching by request params ${req}`);
+    return res.status(200).json([defaultPath]);
+
+}
