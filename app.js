@@ -52,11 +52,14 @@ console.log(process);
 console.log("Environment");
 console.log(process.env);
 
+/*
 //Server configuration
 const port = process.env.PORT  || 3000;
+console.log(`PORT: ${port}`);
 app.listen(port, () => {
   console.log(`Node server started with express on port ${port} `);
 });
+*/
 
 module.exports = app;
  

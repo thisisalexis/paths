@@ -1,25 +1,15 @@
 const express = require("express");
-const app = express();
+const pathsService = require('../services/pathsService');
 
-let defaultPath = { 
-    "id": "1",
-    "name": "My first learning Path",
-    "description": "Long description",
-    "createdBy": "thisisalexis",
-    "createdAt": new Date(),
-    "updatedAt": new Date(),
-    "rate": 5,
-    "category": 50,
-    "visualizations": 661234,
-    "numberOfSteps": 10, 
-    "language": "en_US"
- };
+const app = express();
 
 exports.getAllPaths = (req, res) => {
     
     console.log(req, res); //TODO delete this
 
-    res.status(200).json([defaultPath, defaultPath, defaultPath, defaultPath, defaultPath, defaultPath]);
+    let allPaths = pathsService.getAllPaths(); 
+
+    res.status(200).json(allPaths);
 
 };
 
