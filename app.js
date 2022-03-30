@@ -4,6 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//Loading configuration file
+const dotenv = require('dotenv');
+dotenv.config({ path: './config.env' }); // Básicamene carga lo que está en el archivo .env y lo carga en la variable process.env que es accesible desde todos lados en la app
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const pathsRouter = require('./routes/pathsRouter');
@@ -21,9 +25,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/paths', pathsRouter);
+const apiVersion = process.env.VERSION || 'develop';
+const contextPath = process.env.CONTEXT_PATH;
+
+
+console.log(`API version is:${apiVersion} `);
+
+app.use(`/${contextPath}/${apiVersion}/`, indexRouter);
+app.use(`/${contextPath}/${apiVersion}/users`, usersRouter);
+app.use(`/${contextPath}/${apiVersion}/paths`, pathsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -41,10 +51,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-//Stuffs added by me that shouldn't be deleted and are really been used
-//TODO estas dos líneas deberían estar arriba, antes de todo, moverlas
-const dotenv = require('dotenv'); //debería estar arriba en cargas, porque entonces las variables se están cargando en process 
-dotenv.config({ path: './config.env' }); // Básicamene carga lo que está en el archivo .env y lo carga en la variable process.env que es accesible desde todos lados en la app
 
 //Stuffs added by me that sould be deleted
 console.log("Process object");
