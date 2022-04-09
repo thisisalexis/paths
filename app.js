@@ -11,6 +11,8 @@ dotenv.config({ path: './config.env' }); // Básicamene carga lo que está en el
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const pathsRouter = require('./routes/pathsRouter');
+const { default: mongoose } = require('mongoose');
+const dbConfig = require('./configuration/db.config');
 
 var app = express();
 
@@ -53,10 +55,10 @@ app.use(function(err, req, res, next) {
 
 
 //Stuffs added by me that sould be deleted
-console.log("Process object");
-console.log(process);
-console.log("Environment");
-console.log(process.env);
+//console.log("Process object");
+//console.log(process);
+//console.log("Environment");
+//console.log(process.env);
 
 /*
 //Server configuration
@@ -66,6 +68,9 @@ app.listen(port, () => {
   console.log(`Node server started with express on port ${port} `);
 });
 */
+
+const establishDbConnection = dbConfig.connectToDb();
+
 
 module.exports = app;
  

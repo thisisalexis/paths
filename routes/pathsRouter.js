@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const pathsController = require("../paths/controllers/pathsController");
+const pathsController = require("../paths/controllers/paths.controller");
 
 router.route('/')
         .get(pathsController.getAllPaths)
@@ -8,7 +8,8 @@ router.route('/')
 
 router.route('/:id')
     .get(pathsController.getPathById)
-    .delete(pathsController.deletePath);
+    .delete(pathsController.deletePath)
+    .patch(pathsController.updatePathById);
 
 router.route('/search')
     .get(pathsController.searchPaths)
