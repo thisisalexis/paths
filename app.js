@@ -11,6 +11,7 @@ dotenv.config({ path: './config.env' }); // Básicamene carga lo que está en el
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const pathsRouter = require('./routes/pathsRouter');
+const stepsRouter = require ('./routes/steps.router');
 const { default: mongoose } = require('mongoose');
 const dbConfig = require('./configuration/db.config');
 
@@ -36,6 +37,7 @@ console.log(`API version is:${apiVersion} `);
 app.use(`/${contextPath}/${apiVersion}/`, indexRouter);
 app.use(`/${contextPath}/${apiVersion}/users`, usersRouter);
 app.use(`/${contextPath}/${apiVersion}/paths`, pathsRouter);
+app.use(`/${contextPath}/${apiVersion}/steps`, stepsRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
